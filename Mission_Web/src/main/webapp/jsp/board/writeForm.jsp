@@ -12,6 +12,28 @@ $(document).ready(function(){
 		location.href = 'list.jsp'
 	})
 })
+
+function checkForm(){
+	let f = document.writeForm
+	
+	if(f.title.value == ''){
+		alert('enter title')
+		f.title.focus
+		return false
+	}
+	if(f.writer.value == ''){
+		alert('enter writer')
+		f.writer.focus
+		return false
+	}
+	if(f.content.value == ''){
+		alert('enter content')
+		f.content.focus
+		return false
+	}
+	
+	return true
+}
 </script>
 </head>
 <body>
@@ -20,7 +42,7 @@ $(document).ready(function(){
 		<h2>Write Post</h2>
 		<hr>
 		<br>
-		<form action="write.jsp" method="post">
+		<form action="write.jsp" method="post" name="writeForm" onsubmit="return checkForm()">
 			<table border="1" style="width: 80%">
 				<tr>
 					<th width="25%">Title</th>
