@@ -26,6 +26,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- 경로: http://localhost:9999/Mission-Web/jsp/board/list.jsp -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$('#addBtn').click(function(){
+		location.href = 'writeForm.jsp'
+	})
+})
+</script>
+
 </head>
 <body>
 <div align="center">
