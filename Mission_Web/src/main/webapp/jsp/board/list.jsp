@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
   <%@ page import="java.sql.*" %>
   <%@ page import="kr.ac.kopo.util.ConnectionFactory" %>
+
     
 <%--
 	작업순서
@@ -24,7 +25,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>전체 게시판</title>
 <!-- 경로: http://localhost:9999/Mission-Web/jsp/board/list.jsp -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>

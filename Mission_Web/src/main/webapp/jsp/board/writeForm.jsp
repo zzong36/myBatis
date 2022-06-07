@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Write Form</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -46,16 +46,16 @@ function checkForm(){
 			<table border="1" style="width: 80%">
 				<tr>
 					<th width="25%">Title</th>
-					<td><input type="text" name="title" size="80"></td>
+					<td><input type="text" name="title" size="80" style="width: 80%"></td>
 				</tr>
 				<tr>
 					<th width="25%">Writer</th>
-					<td><input type="text" name="writer"></td>
+					<td><input type="text" name="writer" style="width: 80%"></td>
 				</tr>
 				<tr>
 					<th width="25%">Content</th>
 					<td>
-					<textarea rows="5" cols="80" name="content"></textarea>
+					<textarea rows="5" cols="80" name="content" style="width: 80%"></textarea>
 					</td>
 				</tr>
 			</table>
