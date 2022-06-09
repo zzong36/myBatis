@@ -3,6 +3,8 @@
 <%@page import="kr.ac.kopo.util.JDBCClose"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="kr.ac.kopo.util.ConnectionFactory"%>
+<%@ page import="kr.ac.kopo.board.dao.BoardDAO"%>
+<%@ page import="kr.ac.kopo.board.vo.BoardVO"%>
 
 <%
 /*
@@ -20,11 +22,19 @@ String title = request.getParameter("title");
 String writer = request.getParameter("writer");
 String content = request.getParameter("content");
 
-System.out.println("title: " + title);
-System.out.println("writer: " + writer);
-System.out.println("content: " + content);
+BoardVO board = new BoardVO();
+board.setTitle(title);
+board.setWriter(writer);
+board.setContent(content);
 
-// DB에 접속
+BoardDAO dao = new BoardDAO();
+dao.insertBoard(board);
+
+/* System.out.println("title: " + title);
+System.out.println("writer: " + writer);
+System.out.println("content: " + content); */
+
+/* // DB에 접속
 Connection conn = new ConnectionFactory().getConnection();
 
 StringBuilder sql = new StringBuilder();
@@ -37,7 +47,7 @@ pstmt.setString(2, writer);
 pstmt.setString(3, content);
 
 // 실행
-pstmt.executeUpdate();
+pstmt.executeUpdate(); */
 %>
 
 <!-- 새글 등록해서 전체 게시판으로만 가면 되기 때문에 javascript만 사용하면 된다 -->
@@ -45,5 +55,4 @@ pstmt.executeUpdate();
 	alert("새글 등록을 완료했습니다");
 	// 이동
 	location.href = "list.jsp"
-	
 </script>
