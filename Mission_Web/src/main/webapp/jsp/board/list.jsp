@@ -28,6 +28,8 @@ pageContext.setAttribute("list", list);
 <head>
 <meta charset="UTF-8">
 <title>전체 게시판</title>
+<link rel="stylesheet" href="/Mission_Web/resources/css/layout.css">
+<link rel="stylesheet" href="/Mission_Web/resources/css/table.css">
 <!-- 경로: http://localhost:9999/Mission-Web/jsp/board/list.jsp -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -38,10 +40,13 @@ pageContext.setAttribute("list", list);
 		})
 	})
 </script>
-
 </head>
 <body>
-	<div align="center">
+	<header>
+		<jsp:include page="/jsp/include/topMenu.jsp" />
+	</header>
+	<section>
+		<div align="center">
 		<hr>
 		<h2>전체 게시글 조회</h2>
 		<hr>
@@ -52,8 +57,8 @@ pageContext.setAttribute("list", list);
 				<th width="16%">작성자</th>
 				<th width="20%">등록일</th>
 			</tr>
-			<c:forEach items="${ list }" var="board">
-				<tr>
+			<c:forEach items="${ list }" var="board" varStatus="loop">
+				<tr <c:if test="${ loop.count mod 2 eq 0 }">class="even"</c:if>>
 					<td>${board.no }</td>
 					<td><a href="detail.jsp?no=${board.no}">
 					 <c:out value="${ board.title}" />
@@ -67,5 +72,32 @@ pageContext.setAttribute("list", list);
 		<br>
 		<button id="addBtn">새글등록</button>
 	</div>
+	</section>
+	<footer>
+		<!-- 경로가 Mission_Web 이후부터 시작(xml, include, forward)의 경우 나머지는 localhost:9999/이후부터 시작하므로 절대경로는 /Mission_Web부터 시작  -->
+		<%@ include file="/jsp/include/footer.jsp"%>
+	</footer>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
