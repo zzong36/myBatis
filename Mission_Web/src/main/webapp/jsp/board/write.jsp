@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="kr.ac.kopo.util.JDBCClose"%>
 <%@ page import="java.sql.*"%>
-<%@ page import="kr.ac.kopo.util.ConnectionFactory"%>
 <%@ page import="kr.ac.kopo.board.dao.BoardDAO"%>
 <%@ page import="kr.ac.kopo.board.vo.BoardVO"%>
+<%@ page import="kr.ac.kopo.login.vo.LoginVO"%>
+<%@ page import="kr.ac.kopo.util.*"%>
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
 
 <%
 /*
@@ -17,7 +18,21 @@
 // Post 방식은 encoding이 필요
 request.setCharacterEncoding("utf-8");
 
-// getParameter()를 통해 값 추출
+String saveFolder= "D:/eclipse practice/web-workspace/Mission_Web/src/main/webapp/upload";
+
+MultipartRequest multi = new MultipartRequest(request, saveFolder, 1024*1024*3, "utf-8", new KopoFileNamePolicy());
+
+String title = multi.getParameter("title");
+String writer = multi.getParameter("writer");
+String content = multi.getParameter("content");
+
+BoardVO board = new BoardVO();
+board.setTitle(title);
+board.setWriter(writer);
+board.setContent(content);
+
+System.out.println(board);
+/* // getParameter()를 통해 값 추출
 String title = request.getParameter("title");
 String writer = request.getParameter("writer");
 String content = request.getParameter("content");
@@ -28,7 +43,7 @@ board.setWriter(writer);
 board.setContent(content);
 
 BoardDAO dao = new BoardDAO();
-dao.insertBoard(board);
+// dao.insertBoard(board); */
 
 /* System.out.println("title: " + title);
 System.out.println("writer: " + writer);

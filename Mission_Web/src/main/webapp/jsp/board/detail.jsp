@@ -29,21 +29,21 @@ pageContext.setAttribute("board", board);
 <meta charset="UTF-8">
 <title>세부 게시글</title>
 <script>
-	function doAction(type){
-		switch(type){
+	function doAction(type) {
+		switch (type) {
 		case 'U':
-			location.href="update.jsp?no=${param.no}"
+			location.href = "update.jsp?no=${param.no}"
 			break;
 		case 'D':
-			if(confirm('삭제하시겠습니까?')){
-				location.href="delete.jsp?no=${param.no}"
+			if (confirm('삭제하시겠습니까?')) {
+				location.href = "delete.jsp?no=${param.no}"
 			}
 			break;
 		case 'L':
-			location.href="list.jsp"
+			location.href = "list.jsp"
 			break;
 		}
-	}	
+	}
 </script>
 </head>
 <body>
@@ -79,9 +79,12 @@ pageContext.setAttribute("board", board);
 			</tr>
 		</table>
 		<br>
-		<button onclick="doAction('U')">수 정</button>&nbsp;&nbsp;
-		<button onclick="doAction('D')">삭 제</button>&nbsp;&nbsp;
-		<button onclick="doAction('L')">목 록</button>&nbsp;&nbsp;
+		<button onclick="doAction('U')">수 정</button>
+		&nbsp;&nbsp;
+		<button onclick="doAction('D')">삭 제</button>
+		&nbsp;&nbsp;
+		<button onclick="doAction('L')">목 록</button>
+		&nbsp;&nbsp;
 	</div>
 </body>
 </html>
