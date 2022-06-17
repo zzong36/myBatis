@@ -1,9 +1,11 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="kr.ac.kopo.board.dao.BoardDAO"%>
-<%@ page import="kr.ac.kopo.board.vo.BoardVO"%>
+<%@ page import="kr.ac.kopo.board.vo.*"%>
 <%@ page import="javax.servlet.http.HttpServletRequest"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 
 <%
 //http://localhost:9999/Mission-Web/jsp/board/detail.jsp?no=21
@@ -19,9 +21,15 @@ int no = Integer.parseInt(request.getParameter("no"));
 
 BoardDAO dao = new BoardDAO();
 
+// 1. 게시물 조회
 BoardVO board = dao.selectByNo(no);
 
+// 2. 첨부파일 조회
+List<BoardFileVO> fileList = dao.selectFileByNo(no);
+
+// 3. 공유영역 등록
 pageContext.setAttribute("board", board);
+pageContext.setAttribute("fileList", fileList);
 %>
 <!DOCTYPE html>
 <html>
@@ -76,6 +84,14 @@ pageContext.setAttribute("board", board);
 			<tr>
 				<th width="25%">등록일</th>
 				<td>${ board.regDate }</td>
+			</tr>
+			<tr>
+				<th>첨부파일</th>
+				<td>
+					<c:forEach items="${ fileList }" var="fileVO">
+						<a href="/Mission_Web/upload/${ fileVO.fileSaveName }">${ fileVO.fileOriName}</a> (${ fileVO.fileSize }bytes)
+					</c:forEach>
+				</td>
 			</tr>
 		</table>
 		<br>

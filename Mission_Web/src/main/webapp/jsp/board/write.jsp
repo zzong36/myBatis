@@ -21,7 +21,7 @@
 request.setCharacterEncoding("utf-8");
 
 // String saveFolder= "D:/eclipse practice/web-workspace/Mission_Web/src/main/webapp/upload";
-String saveFolder = "C:/Users/DA/Desktop/saveImg";
+String saveFolder = "D:/eclipse practice/web-workspace/Mission_Web/src/main/webapp/upload";
 
 MultipartRequest multi = new MultipartRequest(request, saveFolder, 1024*1024*3, "utf-8", new KopoFileNamePolicy());
 

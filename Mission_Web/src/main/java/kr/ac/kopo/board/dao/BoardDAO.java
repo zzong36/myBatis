@@ -181,6 +181,9 @@ public class BoardDAO {
 	}
 	
 	public List<BoardFileVO> selectFileByNo(int boardNo){
+		
+		List<BoardFileVO> fileList = new ArrayList<>();
+		
 		StringBuilder sql = new StringBuilder();
 		sql.append("select no, file_ori_name, file_save_name, file_size from t_board_file where board_no = ?");
 		
@@ -192,10 +195,20 @@ public class BoardDAO {
 			
 			ResultSet rs = pstmt.executeQuery();
 			
+			while(rs.next()) {
+				BoardFileVO fileVO = new BoardFileVO();
+				fileVO.setNo(rs.getInt("no"));
+				fileVO.setFileOriName(rs.getString("file_ori_name"));
+				fileVO.setFileSaveName(rs.getString("file_save_name"));
+				fileVO.setFileSize(rs.getInt("file_size"));
+				
+				fileList.add(fileVO);
+			}
+			
 			pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return fileList;
 	}
 }
