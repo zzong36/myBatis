@@ -3,8 +3,103 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.BoardDAO">
-  <insert id="dao.BoardDAO">
-  insert into t_board(no, title, writer, content)
-  values(seq_t_board_no.nextval, 'aaa', 'bbb', 'ccc')
-  </insert>
+	<resultMap type="boardVO" id="boardMap">
+		<!-- <result column="no" property="no" /> <result column="title" property="title" 
+			/> <result column="writer" property="writer" /> <result column="content" 
+			property="content" /> -->
+		<result column="view_cnt" property="viewCnt" />
+		<result column="reg_date" property="regDate" />
+	</resultMap>
+
+	<sql id="selectAll">
+		select no, title, writer, content, view_cnt as viewCnt,
+		to_char(reg_date, 'yyyy-mm-dd') regDate from t_board
+	</sql>
+
+	<insert id="insertBoard" parameterType="boardVO">
+		insert into t_board(no,
+		title, writer, content)
+		values(seq_t_board_no.nextval, #{title}, #{writer}, #{content})
+	</insert>
+
+	<select id="selectAllBoard" resultType="boardVO">
+		select no, title, writer,
+		content, view_cnt as viewCnt, to_char(reg_date,
+		'yyyy-mm-dd') regDate
+		from t_board order by no desc
+	</select>
+
+	<select id="selectByNo" parameterType="int">
+		select no, title, writer,
+		content, view_cnt as viewCnt, to char(reg_date,
+		'yyyy=mm-dd') as
+		regDate from t_board where no = #{no}
+	</select>
+
+	<select id="selectByNo2" resultType="boardVO"
+		parameterType="boardVO">
+		select no, title, writer, content, view_cnt as viewCnt
+		,
+		to_char(reg_date, 'yyyy-mm-dd') regDate
+		from t_board
+		where no = #{no}
+	</select>
+
+	<select id="selectByNo3" parameterType="boardVO"
+		resultMap="boardMap">
+		select *
+		from t_board
+		where no = #{no}
+	</select>
+
+	<select id="selectWhere" resultType="boardVO"
+		parameterType="string">
+		<include refid="selectAll" />
+		where title like '%' || #{title} || '%'
+		<!-- where title like '%${title}%' -->
+	</select>
+
+	<select id="selectWhere2" resultType="boardVO"
+		parameterType="boardVO">
+		<include refid="selectAll" />
+		
+		<where>
+			<if test="title != null">
+				title = #{title}
+			</if>
+			<if test="writer != null">
+				and writer = #{writer}
+			</if>
+		</where>
+		
+	</select>
+	
+	<select id="selectNos" parameterType="boardVO" resultType="boardVO">
+		<include refid="selectAll" />
+		where no in 
+		<foreach collection="nos" item="bno" separator="," open="(" close=")">
+			#{bno}
+		</foreach>
+		
+	</select>
+
+	<select id="selectNos2" parameterType="boardVO" resultType="boardVO">
+		<include refid="selectAll" />
+		where no in 
+		<foreach collection="array" item="bno" separator="," open="(" close=")">
+			#{bno}
+		</foreach>
+		
+	</select>
+	
+	<select id="selectMap" resultType="boardVO" parameterType="map">
+		<include refid="selectAll" />
+		where title=#{title} and writer = #{writer}
+	</select>
+	
+	<select id="selectMap2" resultType="map" parameterType="int">
+		<include refid="selectAll" />
+		where no=#{no}
+	</select>
+
 </mapper>
