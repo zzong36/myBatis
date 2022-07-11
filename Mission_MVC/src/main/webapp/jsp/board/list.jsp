@@ -8,29 +8,13 @@
 <%@ page import="kr.ac.kopo.board.vo.BoardVO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
-<%--
-	작업순서
-	1. t_board 테이블에서 전체 게시글 조회
-	2. 조회된 게시물을 하나씩 웹브라우저 출력
- --%>
-
-<%
-BoardDAO dao = new BoardDAO();
-List<BoardVO> list = dao.selectAll();
-
-// 공유영역 등록
-pageContext.setAttribute("list", list);
-%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>전체 게시판</title>
-<link rel="stylesheet" href="/Mission_Web/resources/css/layout.css">
-<link rel="stylesheet" href="/Mission_Web/resources/css/table.css">
-<!-- 경로: http://localhost:9999/Mission-Web/jsp/board/list.jsp -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/table.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
@@ -45,11 +29,11 @@ pageContext.setAttribute("list", list);
 		<c:choose>
 		<c:when test="${empty userVO}">
 			if(confirm('로그인 후 사용가능합니다 로그인 페이지로 이동할까요?')){
-				location.href="/${pageContext.request.contextPath}/jsp/login/login.jsp"
+				location.href="${ pageContext.request.contextPath }/jsp/login/login.jsp"
 			}
 		</c:when>
 		<c:otherwise>
-		location.href = '${pageContext.request.contextPath}/jsp/board/detail.jsp?no=' + boardNo
+		location.href = 'detail.jsp?no=' + boardNo
 		</c:otherwise>
 		</c:choose>
 	}
