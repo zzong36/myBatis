@@ -5,7 +5,12 @@
   <servlet>
   <servlet-name>frontController</servlet-name>
   <servlet-class>kr.ac.kopo.controller.FrontControllerServlet</servlet-class>
+  <init-param>
+  		<param-name>propLocation</param-name>
+  		<param-value>D:\\eclipse practice\\web-workspace\\Mission_MVC\\bean.properties</param-value> 
+ </init-param>
   </servlet>
+  
   <servlet-mapping>
   <servlet-name>frontController</servlet-name>
   <url-pattern>*.do</url-pattern>

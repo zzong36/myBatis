@@ -9,5 +9,6 @@
 <body>
 	<a href="${pageContext.request.contextPath}/board/list.do">게시판</a>
 	<a href="${pageContext.request.contextPath}/board/writeForm.do">글작성</a>
+	<a href="${pageContext.request.contextPath}/login.do">로그인</a>
 </body>
 </html>

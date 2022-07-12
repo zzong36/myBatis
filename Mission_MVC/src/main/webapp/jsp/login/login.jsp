@@ -48,7 +48,7 @@
 			<h2>로그인</h2>
 			<hr>
 			<br>
-			<form action="loginProcess.jsp" method="post"
+			<form action="${pageContext.request.contextPath}/loginProcess.do" method="post"
 				onsubmit="return checkForm()" name="loginForm">
 				<table style="width: 40%">
 					<tr>
