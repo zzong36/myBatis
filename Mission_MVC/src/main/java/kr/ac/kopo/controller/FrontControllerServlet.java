@@ -31,7 +31,7 @@ public class FrontControllerServlet extends HttpServlet {
 
 		String context = request.getContextPath();
 		String uri = request.getRequestURI();
-		// System.out.println("uri : " + uri);
+		 System.out.println("uri : " + uri);
 		uri = uri.substring(context.length());
 		// System.out.println("context :" + context);
 		// System.out.println("uri : " + uri);

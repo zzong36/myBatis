@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.ac.kopo.board.vo.BoardFileVO;
 import kr.ac.kopo.board.vo.BoardVO;
 import kr.ac.kopo.util.ConnectionFactory;
 import kr.ac.kopo.util.JDBCClose;
@@ -94,9 +93,7 @@ public class BoardDAO {
 				board.setWriter(writer);
 				board.setRegDate(regDate);
 
-				//System.out.println(board);
 				list.add(board);
-				//System.out.println(list);
 
 			}
 
@@ -158,59 +155,4 @@ public class BoardDAO {
 		}
 	}
 
-	// -----------------------------------------------------------------------------
-	// 첨부파일 CRUD
-	// -----------------------------------------------------------------------------
-
-	public void insertBoardFile(BoardFileVO fileVO) {
-		StringBuilder sql = new StringBuilder();
-		sql.append("insert into t_board_file(no, board_no, file_ori_name, file_save_name, file_size)  ");
-		sql.append("  values(seq_t_board_file_no.nextval, ?, ?, ?, ?) ");
-		
-		try(
-				Connection conn = new ConnectionFactory().getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql.toString());){
-			
-			pstmt.setInt(1, fileVO.getBoardNo());
-			pstmt.setString(2, fileVO.getFileOriName());
-			pstmt.setString(3, fileVO.getFileSaveName());
-			pstmt.setInt(4, fileVO.getFileSize());
-			
-			pstmt.executeUpdate();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public List<BoardFileVO> selectFileByNo(int boardNo){
-		
-		List<BoardFileVO> fileList = new ArrayList<>();
-		
-		StringBuilder sql = new StringBuilder();
-		sql.append("select no, file_ori_name, file_save_name, file_size from t_board_file where board_no = ?");
-		
-		try(
-				Connection conn = new ConnectionFactory().getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql.toString());){
-			
-			pstmt.setInt(1, boardNo);
-			
-			ResultSet rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				BoardFileVO fileVO = new BoardFileVO();
-				fileVO.setNo(rs.getInt("no"));
-				fileVO.setFileOriName(rs.getString("file_ori_name"));
-				fileVO.setFileSaveName(rs.getString("file_save_name"));
-				fileVO.setFileSize(rs.getInt("file_size"));
-				
-				fileList.add(fileVO);
-			}
-			
-			pstmt.executeUpdate();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return fileList;
-	}
 }
